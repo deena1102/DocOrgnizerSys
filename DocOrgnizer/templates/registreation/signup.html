@@ -1,0 +1,238 @@
+<!-- sign_up.html -->
+{% extends 'base.html' %}
+{% load csp %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css">
+    <title>Sign Up</title>
+    <style nonce="{{request.csp_nonce}}">
+        /* .password-policy-tooltip {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+        }
+        .id-policy-tooltip {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+        }
+        .name-policy-tooltip {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+        } */
+
+        .password-policy-tooltip:hover .password-policy-tooltip-text{
+            display: block;
+        }
+        .id-policy-tooltip:hover .id-policy-tooltip-text{
+            display: block;
+        }
+        .name-policy-tooltip:hover .name-policy-tooltip-text{
+            display: block;
+        }
+        .password-policy-tooltip-text {
+            display: none;
+            position: absolute;
+            background-color: #d4d4d4;
+            color: black;
+            padding: 10px;
+            border-radius: 4px;
+            z-index: 1;
+            bottom: 125%;
+            left: 0;
+            width: 350px;
+        }
+        .id-policy-tooltip-text{
+            display: none;
+            position: absolute;
+            background-color: #d4d4d4;
+            color: black;
+            padding: 10px;
+            border-radius: 4px;
+            z-index: 1;
+            bottom: 125%;
+            left: 0;
+            width: 350px;
+        }
+        .name-policy-tooltip-text {
+            display: none;
+            position: absolute;
+            background-color: #d4d4d4;
+            color: black;
+            padding: 10px;
+            border-radius: 4px;
+            z-index: 1;
+            bottom: 125%;
+            left: 0;
+            width: 350px;
+        }
+        .password-policy-tooltip-text p{
+            margin: 5px 0;
+        }
+        .id-policy-tooltip-text p {
+            margin: 5px 0;
+        }
+        .name-policy-tooltip-text p {
+            margin: 5px 0;
+        }
+        /* Apply "control" styles to "password-policy-tooltip" */
+        .password-policy-tooltip .control{
+            width: 100%;
+            box-sizing: border-box;
+            display: flex;
+            align-items: stretch;
+        }
+        .id-policy-tooltip .control{
+            width: 100%;
+            box-sizing: border-box;
+            display: flex;
+            align-items: stretch;
+        }
+        .name-policy-tooltip .control{
+            width: 100%;
+            box-sizing: border-box;
+            display: flex;
+            align-items: stretch;
+        }
+        .password-policy-tooltip .input{
+            flex: 1;
+            margin-right: 7em; /* Adjust margin if needed */
+        }
+        .id-policy-tooltip .input{
+            flex: 1;
+            margin-right: 7em; /* Adjust margin if needed */
+        }
+        .name-policy-tooltip .input{
+            flex: 1;
+            margin-right: 7em; /* Adjust margin if needed */
+        }
+    </style>
+
+</head>
+<body>
+    <div class="container">
+        <div class="column is-4 is-offset-4">
+            <div class="box has-background-light">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {# Display custom validation error message #}
+                    {% if form.non_field_errors %}
+                        {% for error in form.non_field_errors %}
+                            {% if error.code == 'invalid_credentials' %}
+                                <div class="notification is-danger">
+                                    <p>{{ error }}</p>
+                                </div>
+                            {% else %}
+                                <div class="notification is-danger">
+                                    <p>{{ error }}</p>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                    <!-- {{ form.non_field_errors }}            -->
+                    <div class="field">
+                        <label class="label">Full User Name</label>
+                        <div class="control name-policy-tooltip">
+                            <input class="input is-medium {% if form.full_name.errors %}is-danger{% endif %}" 
+                               placeholder="Enter your full name" 
+                               name="{{ form.full_name.name }}"
+                               value="{{ form.full_name.value|default:'' }}" 
+                               type="{{ form.full_name.field.widget.input_type }}" 
+                               id="{{ form.full_name.id_for_label }}">
+                               <div class="name-policy-tooltip-text">
+                                <p>• This field is case sensitive, you MUST write your full name in english. </p>
+                            </div>
+                        </div>
+                        {% for error in form.full_name.errors %}
+                            <p class="help is-danger">{{ error }}</p>
+                        {% endfor %}
+                    </div>      
+                   
+                    <div class="field">
+                        <label class="label" for="id_national_id">National ID</label>
+                        <div class="control id-policy-tooltip">
+                            <input class="input is-medium {% if form.national_id.errors %}is-danger{% endif %}" 
+                                placeholder="Enter your national ID" 
+                                name="{{ form.national_id.name }}"
+                                value="{{ form.national_id.value|default:'' }}" 
+                                type="{{ form.national_id.field.widget.input_type }}" 
+                                id="{{ form.national_id.id_for_label }}">
+                                <div class="id-policy-tooltip-text">
+                                    <p>• Your ID MUST be as it is in your National ID</p>
+                                </div>
+                        </div>
+                        {% for error in form.national_id.errors %}
+                            <p class="help is-danger">{{ error }}</p>
+                        {% endfor %}
+                    </div>
+
+                    <!-- Email -->
+                    <div class="field">
+                        <label class="label" for="id_email">Email</label>
+                        <div class="control">
+                            <input class="input is-medium {% if form.email.errors %}is-danger{% endif %}" 
+                                placeholder="Enter your email" 
+                                name="{{ form.email.name }}"
+                                value="{{ form.email.value|default:'' }}" 
+                                type="{{ form.email.field.widget.input_type }}" 
+                                id="{{ form.email.id_for_label }}">
+                        </div>
+                        {% for error in form.email.errors %}
+                            <p class="help is-danger">{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                
+
+                    <!-- Password -->
+                    <div class="field">
+                        <label class="label" for="id_password">Password</label>
+                        <div class="control password-policy-tooltip">
+                            <input class="input is-medium {% if form.password.errors %}is-danger{% endif %}" 
+                                placeholder="Enter your password" 
+                                name="{{ form.password.name }}"
+                                type="{{ form.password.field.widget.input_type }}" 
+                                id="{{ form.password.id_for_label }}">
+                                <div class="password-policy-tooltip-text">
+                                    <p>• Your password can't be too similar to your other personal information.</p>
+                                    <p>• Your password must contain at least 8 characters.</p>
+                                    <p>• Your password can't be a commonly used password.</p>
+                                    <p>• Your password can't be entirely numeric.</p>
+                                    <p>• Your password must contain at least one uppercase, one lowercase, and one special character.</p>
+                                </div>
+                        </div>
+                        {% for error in form.password.errors %}
+                            {% if error.code != 'invalid_credentials' %}
+                                <p class="help is-danger">{{ error }}</p>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+
+                    <!-- Confirm Password -->
+                    <div class="field">
+                        <label class="label" for="id_confirm_password">Confirm Password</label>
+                        <div class="control">
+                            <input class="input is-medium {% if form.confirm_password.errors %}is-danger{% endif %}" 
+                                placeholder="Confirm your password" 
+                                name="{{ form.confirm_password.name }}"
+                                type="{{ form.confirm_password.field.widget.input_type }}" 
+                                id="{{ form.confirm_password.id_for_label }}">
+                        </div>
+                        {% for error in form.confirm_password.errors %}
+                            <p class="help is-danger">{{ error }}</p>
+                        {% endfor %}
+                    </div>     
+                    <div class="field">
+                        <button class="button is-success is-fullwidth is-medium">Sign Up</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+{% endblock content %}

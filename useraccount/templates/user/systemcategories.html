@@ -1,0 +1,166 @@
+{% extends 'index.html' %}
+{% load csp %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>System Categories</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <style nonce="{{request.csp_nonce}}">
+        .section{
+            margin: -3rem;
+            overflow:hidden;
+        }
+    </style>
+</head>
+<body>
+
+<section class="section">
+    <div class="container">
+        {% if error_message %}
+            <div class="notification is-danger">
+                <p>{{ error_message }}</p>
+            </div>
+        {% endif %}
+        {% if belongs_to_group1 %}
+        <div class="columns is-centered">
+            <div class="column is-two-thirds">
+                <p style="text-align: center; font-size: 24px; font-weight: bold; margin-top: 6rem;">
+                    We appreciate your interest in using certain services on DocOrganizer. However, for added security, a physical presence verification is required for access this service.
+                    To complete this verification, kindly visit the DocOrganizer center, bringing your national ID for authentication. This in-person process is necessary to ensure the security of your account.
+                    If you have questions or need assistance, feel free to contact us.<br><strong> Your safety and the security of your information are our top priorities.
+                </p>
+            </div>
+        </div>
+        {% else %}
+        <div class="columns is-multiline">
+            <div class="column is-one-third">
+                <div class="card">
+                    <div class="card-content has-text-centered">
+                        <img src="{% static 'image/flag.jpeg' %}" alt="Logo" style="max-width: 80px; margin-bottom: 5px;">
+                        <p class="title is-size-6">National ID</p>
+                        <div class="content is-size-7">
+                            Essential personal identification document for individuals.
+                        </div>
+                        <a class="button is-primary is-small" href="{% url 'protectedcategory' category_name='National ID' %}" style="background-color: #48c78e;">View Category</a>       
+                    </div>
+                </div> 
+            </div>
+            <!-- Card 2 -->
+            <div class="column is-one-third">
+                <div class="card">
+                    <div class="card-content has-text-centered">
+                        <img src="{% static 'image/flag.jpeg' %}" alt="Logo" style="max-width: 80px; margin-bottom: 5px;">
+                        <p class="title is-size-6">Passport</p>
+                        <div class="content is-size-7">
+                            International travel document verifying citizenship and identity.
+                        </div>
+                        <a class="button is-primary is-small" href="{% url 'protectedcategory' category_name='Passport' %}"style="background-color: #48c78e;">View Category</a>
+                    
+                    </div>
+                    
+                </div>
+            </div>
+            <!-- Card 3 -->
+            <div class="column is-one-third">
+                <div class="card">
+                    <div class="card-content has-text-centered">
+                        <img src="{% static 'image/flag.jpeg' %}" alt="Logo" style="max-width: 80px; margin-bottom: 5px;">
+                        <p class="title is-size-6">Birth Certificate</p>
+                        <div class="content is-size-7">
+                            Official record documenting a person's birth details.
+                        </div>
+                        <a class="button is-primary is-small" href="{% url 'protectedcategory' category_name='Birth Certificate' %}" style="background-color: #48c78e;">View Category</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 4 -->
+            <div class="column is-one-third">
+                <div class="card">
+                    <div class="card-content has-text-centered">
+                        <img src="{% static 'image/flag.jpeg' %}" alt="Logo" style="max-width: 80px; margin-bottom: 5px;">
+                        <p class="title is-size-6">Driving License</p>
+                        <div class="content is-size-7">
+                            Authorization to drive vehicles within specific categories.
+                        </div>
+                        <a class="button is-primary is-small" href="{% url 'protectedcategory' category_name='Driving License' %}" style="background-color: #48c78e;">View Category</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 5 -->
+            <div class="column is-one-third">
+                <div class="card">
+                    <div class="card-content has-text-centered">
+                        <img src="{% static 'image/flag.jpeg' %}" alt="Logo" style="max-width:80px; margin-bottom: 5px;">
+                        <p class="title is-size-6">Car License</p>
+                        <div class="content is-size-7">
+                            Permit allowing legal operation of a motor vehicle.
+                        </div>
+                        <a class="button is-primary is-small" href="{% url 'protectedcategory' category_name='Car License' %}" style="background-color: #48c78e;">View Category</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 6 -->
+            <div class="column is-one-third">
+                <div class="card">
+                    <div class="card-content has-text-centered">
+                        <img src="{% static 'image/flag.jpeg' %}" alt="Logo" style="max-width: 80px; margin-bottom: 5px;">
+                        <p class="title is-size-6">High School Diploma</p>
+                        <div class="content is-size-7">
+                            Official recognition of completing secondary education.
+                        </div>
+                        <a class="button is-primary is-small" href="{% url 'protectedcategory' category_name='High School Diploma' %}" style="background-color: #48c78e;">View Category</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 7 -->
+            <div class="column is-one-third">
+                <div class="card">
+                    <div class="card-content has-text-centered">
+                        <img src="{% static 'image/flag.jpeg' %}" alt="Logo" style="max-width: 80px; margin-bottom: 5px;">
+                        <p class="title is-size-6">University Degree</p>
+                        <div class="content is-size-7">
+                            Official proof of completing higher education studies.
+                        </div>
+                        <a class="button is-primary is-small"href="{% url 'protectedcategory' category_name='University Degree' %}" style="background-color: #48c78e;">View Category</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 8 -->
+            <div class="column is-one-third">
+                <div class="card">
+                    <div class="card-content has-text-centered">
+                        <img src="{% static 'image/flag.jpeg' %}" alt="Logo" style="max-width: 80px; margin-bottom: 5px;">
+                        <p class="title is-size-6">Health Insurance</p>
+                        <div class="content is-size-7">
+                            Coverage protecting against medical expenses and treatments.
+                        </div>
+                        <a class="button is-primary is-small" href="{% url 'protectedcategory' category_name='Health Insurance' %}" style="background-color: #48c78e;">View Category</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 9 -->
+            <div class="column is-one-third">
+                <div class="card">
+                    <div class="card-content has-text-centered">
+                        <img src="{% static 'image/flag.jpeg' %}" alt="Logo" style="max-width: 80px; margin-bottom: 5px;">
+                        <p class="title is-size-6">Land Ownership Contracts</p>
+                        <div class="content is-size-7">
+                            Legal documents confirming ownership of real estate.
+                        </div>
+                        <a class="button is-primary is-small" href="{% url 'protectedcategory' category_name='Land Ownership Contracts' %}" style="background-color: #48c78e;">View Category</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+</body>
+</html>
+{% endblock %}

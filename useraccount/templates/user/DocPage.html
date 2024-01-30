@@ -1,0 +1,55 @@
+{% extends 'index.html' %}
+{% load csp %}
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>User Categories</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <style nonce="{{request.csp_nonce}}">
+        section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .custem-size {
+            width: 800px;
+            height:250px;
+        }
+    </style>
+</head>
+<body>
+<section class="section">
+    <div class="container">
+        {% if pdf_info_list %}
+            {% for pdf_info in pdf_info_list %}
+                <div class="columns is-centered">
+                    <div class="column is-half">
+                        <div class="card custem-size">
+                            <div class="card-content has-text-centered">
+                                <img src="{% static 'image/pdf.jpg' %}" alt="Pdf" style="max-width: 60px; margin-bottom: 20px;">
+                                <p class="title is-size-5 " style="margin-bottom: 40px;">{{ pdf_info.pdf_name }}</p>
+								<a class="button is-primary" href="{% url 'open_pdf' category_name=category.category_name pdf_name=pdf_info.pdf_name %}" target="_blank"style="background-color: #48c78e;">Open Document PDF</a>
+								<a class="button is-primary" href="{% url 'download_pdf' category_name=category.category_name pdf_name=pdf_info.pdf_name %}" download style="background-color: #b2b2b2;">Download Document</a>                         
+							</div>
+                        </div>
+                    </div>
+
+                </div>
+            {% endfor %}
+        {% else %}
+        <div class="columns is-centered">
+            <div class="column is-half">
+                <p style="text-align: center; font-size: 24px; font-weight: bold; margin-top: 8rem;">This document does not exist for the citizen with national ID {{user_national_id}}. Please contact the relevant authorities if there is misunderstanding.</p>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</section>
+</body>
+</html>
+{% endblock %}

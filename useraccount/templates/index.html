@@ -1,0 +1,124 @@
+{% load csp %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DocOrganizer</title>
+    <link rel="icon" href="{% static 'image/logo.png' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css">
+    <style nonce="{{request.csp_nonce}}">
+        body {
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-size: cover;
+            background-position: center;
+        }
+
+
+        .menu {
+            width: 100%;
+            background-color: #48c78e;
+            margin: 0rem;
+            padding: 0.8rem;
+            padding-top: 0.45rem;
+            padding-bottom: 0.45rem;
+            box-shadow: 4px 2px 7px 0px rgb(84, 161, 127);
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            color: white;
+            text-shadow: 1px 1px 1px gray;
+            margin-bottom: 5rem;
+        }
+
+        .page-logo {
+            width: 150px;
+            height: 150px;
+            margin-bottom: 10px;
+        }
+        .menu>.logo {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+
+        .menu>.logo>img {
+            width: 30px;
+            height: 30px;
+            margin-right: 5px;
+
+        }
+        .menu>.btns>a {
+            color: white;
+            text-shadow: 1px 1px 1px #808080;
+            text-decoration: none;
+        }
+        .menu>.btns {
+            display: flex;
+            flex-direction: row;
+        }
+        .nav, .navbar-link {
+            background-color: #226347;
+            padding: 0.5rem;
+            padding-left: 0.9rem;
+            padding-right: 0.9rem;
+            border-radius: 15px;
+            margin: 0.2rem;
+            font-size: small;
+            color: white;
+        }
+        .box {
+            box-shadow: 2px 1px 5px 0px #226347;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="menu">
+        <div class="logo">
+            <img src="{%static 'image/logo.png' %}" alt="Logo image">
+            <div class="doc-organizer">DocOrganizer</div>
+        </div>
+        <div class="btns">
+            <a class="nav" href="{% url 'userinfo' %}">My Information</a>
+            <div class="navbar-item has-dropdown is-hoverable">
+                <a class="navbar-link" style="color: white;" href="">Categories</a>
+                <div class="navbar-dropdown">
+                    <a class="navbar-item" href="{% url 'systemcategories' %}">System Categories</a>
+                    <a class="navbar-item" href="{% url 'usercategories' %}">Custom Categories</a>
+                    <a class="navbar-item" href="{% url 'createcategory' %}">Create Category</a>
+                </div>
+            </div>
+            <div class="navbar-item has-dropdown is-hoverable">
+                <a class="navbar-link" style="color: white;" href="">Account</a>
+                <div class="navbar-dropdown">
+                    <a class="navbar-item" href="{% url 'profile' %}" >Profile</a>
+					<hr class="navbar-divider">
+					<a class="navbar-item" href="{% url 'logout' %}">Logout</a>
+                </div>
+            </div>
+            <div class="navbar-item has-dropdown is-hoverable">
+                <a class="navbar-link" style="color: white;" href="">Help</a>
+                <div class="navbar-dropdown">
+                    <a class="navbar-item" href="{% url 'FAQ' %}">FAQ</a>
+                    <a class="navbar-item" href="{% url 'about' %}">About Us</a>
+                    <a class="navbar-item" href="{% url 'contactus' %}">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% block content %}
+    <div class="container">
+        
+    </div>
+    {% endblock content %}
+
+</body>
+</html>

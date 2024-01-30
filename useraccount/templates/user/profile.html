@@ -1,0 +1,217 @@
+{% extends 'index.html' %}
+{% load csp %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css">
+    <style nonce="{{request.csp_nonce}}">  
+        .container {
+            display: flex;
+            flex-direction: row;
+            height: 70vh;
+            box-shadow: 1px 2px 6px 1px #ccc;
+            width: 60%;
+            height: 60%;
+
+        }
+
+        .div1 {
+            background: rgb(45, 107, 79);
+            background: linear-gradient(30deg, rgba(45, 107, 79, 1) 0%, rgba(72, 199, 142, 1) 35%, rgb(44, 255, 153) 100%);
+            width: 40%;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            color: aliceblue;
+            text-shadow: 1px 1px 1px #48c78e;
+            box-shadow: 1px 2px 6px 1px #226347;
+        }
+
+        .pic {
+            height: 200px;
+            width: 200px;
+        }
+
+        .name {
+            font-size: larger;
+            font-weight: bold;
+        }
+
+        .edit {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 30%;
+            padding-left: 50px;
+        }
+
+        .div2 {
+            width: 60%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            padding: 2rem;
+        }
+
+        .inf {
+            display: flex;
+            text-align: left;
+            font-weight: bold;
+            padding-left: 1rem;
+            
+
+        }
+
+        hr {
+            height: 1px;
+            border: none;
+            background-color: #ccc;
+            margin: 10px 0;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+        }
+        .contact,.personalinfo {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+
+
+        }
+
+        .space {
+            width: 70%;
+
+        }
+        .birthdate,.national-id,.user-name, .email{
+            opacity: 0.7;
+            padding: 0.2rem;
+        }
+
+        .update-password-button, .update-profile-button{
+            position: absolute;
+            bottom: 12px;
+            right: 12px;
+        }
+          
+        .update-password-button {
+            margin-right: 120px;
+        }
+
+        .update-password-button, .update-profile-button {
+            width: 110px;
+            height: 30px;
+            background-color:#48c78e;
+            color: #fff;
+            font-size: 12px;
+        }
+
+        .update-password-button a,.update-profile-button a{
+            color: white;
+            text-decoration: none; /* Optional: Remove the underline */
+        }
+        /* .button-container {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+    } */
+    .button-container {
+        position: absolute;
+        bottom: 0;
+        left: 42%;
+        transform: translateX(-700%);
+        }
+    .bottom-center-button {
+        /* Add your button styling here */
+            width: 110px;
+            height: 30px;
+            background-color:#48c78e;
+            color: #fff;
+            font-size: 12px;
+            position: absolute;
+            bottom: 12px;
+    }
+    .bottom-center-button a {
+            color: white;
+            text-decoration: none; /* Optional: Remove the underline */
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="div1">
+            <img class="pic" src="{% static 'image/defult.png' %}" alt="">
+            <span class="name">Full Name </span>
+            <span class="info">DocOrganizer</span>
+            <span class="edit"> <img src="{% static 'image/writing-icon.svg' %}" alt=""> </span>
+
+            {% if is_staff_member %}
+            <div class="button-container">
+                <button type="button" class="bottom-center-button">
+                    <a href="{% url 'updateusersview' %}"> Users Groups</a> 
+                </button>
+            </div>
+            {% endif %}
+        </div>
+        <!-- /**************INPUT PART**************/ -->
+        <div class="div2">
+            <span class="inf">Information</span>
+            <hr>
+            <div class="personalinfo">
+                <span class="space">
+                    Full Name
+                    <div class="user-name">{{ user_profile.full_name }}</div>
+                </span>
+                <span class="space">
+                    National ID
+                    <div class="national-id">{{ user_profile.national_id }}</div>
+                </span>
+            </div>
+            <hr>
+            <div class="contact">
+                <span class="space">
+                    Email
+                    <div class="email">{{ user_profile.email }}</div>
+                </span>
+                <!-- Add phone information if available in your model -->
+                <span class="space">
+                    Date of Birth
+                   <div class="birthdate">{{ birthdate|date }}</div>
+               </span>
+            </div>
+
+            <div class="card-footer">
+                <div class="d-flex w-100 text-end justify-content-end">
+                    <button type="button" class="update-password-button">
+                        <a href="{% url 'changepassword' %}"> Change Password</a>
+                    </button>
+                    <button type="button" class="update-profile-button">
+                        <a href="{% url 'changeemail' %}"> Change Email</a> 
+                    </button>
+                </div>
+            </div>
+    
+        </div>
+    </div>
+    <!-- {% if belongs_to_group2 %}
+    <div class="button-container">
+        <button type="button" class="bottom-right-button">
+            <a href="#"> Users Groups</a> 
+        </button>
+    </div>
+    {% endif %} -->
+
+</body>
+
+</html>
+{% endblock %}

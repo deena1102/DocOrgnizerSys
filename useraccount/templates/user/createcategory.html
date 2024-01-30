@@ -1,0 +1,122 @@
+{% extends 'index.html' %}
+{% load csp %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Category</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css">
+    <style nonce="{{request.csp_nonce}}">
+        body {
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-image: url("{%static 'image/background.png' %}");
+            background-size: cover;
+            background-position: center;
+        }
+        .container>.column>.box>form>.field>label {
+            color: #48c78e;
+        }
+        .container{
+        height: 70vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center; 
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="column is-4 is-offset-4">
+            <div class="box has-background-light">
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    
+                    <!-- Display global form errors -->
+                    {% for error in form.non_field_errors %}
+                        <p class="notification is-danger">{{ error }}</p>
+                    {% endfor %}
+                    
+                    <div class="field">
+                        <label class="label" for="{{ form.category_name.id_for_label }}">Category Name</label>
+                        <div class="control">
+                            <input class="input is-medium {% if form.category_name.errors %}is-danger{% endif %}" 
+                                type="{{ form.category_name.field.widget.input_type }}"
+                                id="{{ form.category_name.id_for_label }}"
+                                name="{{ form.category_name.name }}"
+                                placeholder="Enter your category name">
+                            
+                            <!-- Display field-specific errors -->
+                            {% for error in form.category_name.errors %}
+                                <p class="help is-danger">{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label class="label" for="{{ form.category_description.id_for_label }}">Category Description</label>
+                        <div class="control">
+                            <input class="input is-medium {% if form.category_description.errors %}is-danger{% endif %}" 
+                                type="{{ form.category_description.field.widget.input_type }}"
+                                id="{{ form.category_description.id_for_label }}"
+                                name="{{ form.category_description.name }}"
+                                placeholder="Enter your category description">
+                            
+                            <!-- Display field-specific errors -->
+                            {% for error in form.category_description.errors %}
+                                <p class="help is-danger">{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label class="label" for="{{ form.password.id_for_label }}">Password</label>
+                        <div class="control">
+                            <input class="input is-medium {% if form.password.errors %}is-danger{% endif %}" 
+                                type="{{ form.password.field.widget.input_type }}"
+                                id="{{ form.password.id_for_label }}"
+                                name="{{ form.password.name }}"
+                                placeholder="Enter your password">
+                            
+                            <!-- Display field-specific errors -->
+                            {% for error in form.password.errors %}
+                                <p class="help is-danger">{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label class="label" for="{{ form.document_pdf.id_for_label }}">Upload Your Document PDF</label>
+                        <div class="control">
+                            <input class="input is-medium {% if form.document_pdf.errors %}is-danger{% endif %}" 
+                                type="file"
+                                id="{{ form.document_pdf.id_for_label }}"
+                                name="{{ form.document_pdf.name }}"
+                                placeholder="Enter your PDF document" 
+                                accept=".pdf">
+                            
+                            <!-- Display field-specific errors -->
+                            {% for error in form.document_pdf.errors %}
+                                <p class="help is-danger">{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    </div> 
+
+                    <div class="field">
+                        <button class="button is-success is-fullwidth is-medium">Create Category</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+{% endblock %}

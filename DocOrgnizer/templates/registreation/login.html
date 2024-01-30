@@ -1,0 +1,91 @@
+<!-- DocOrgnizer/templates/registration/login.html -->
+{% extends 'base.html' %}
+{% load csp %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="column is-4 is-offset-4">
+            <div class="box has-background-light">
+                <form method="POST">
+                    {% csrf_token %}
+                    <!-- Display general error messages -->
+                    {% for message in messages %}
+                        <p class="help is-danger">{{ message|safe }}</p>
+                    {% endfor %}
+                    <!-- Display non-field errors -->
+                    {% if form.non_field_errors %}
+                        <div class="notification is-danger">
+                            {% for error in form.non_field_errors %}
+                                {{ error }}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                    <div class="field">
+                        <label class="label" for="{{ form.email_or_username.id_for_label }}">Full User Name or Email</label>
+                        <div class="control">
+                            <input class="input is-medium " 
+                                placeholder="Enter your username or email" 
+                                name="{{ form.email_or_username.name }}"
+                                value="{{ form.email_or_username.value|default:'' }}" 
+                                type="{{ form.email_or_username.field.widget.input_type }}" 
+                                id="{{ form.email_or_username.id_for_label }}">
+                        </div>
+                        {% for error in form.email_or_username.errors %}
+                        <p class="help is-danger">{{ error }}</p>
+                        {% endfor %}
+                    </div>
+
+                    <div class="field">
+                        <label class="label" for="{{ form.password.id_for_label }}">Password</label>
+                        <div class="control">
+                            <input class="input is-medium" 
+                                placeholder="Enter your password" 
+                                name="{{ form.password.name }}"
+                                type="{{ form.password.field.widget.input_type }}" 
+                                id="{{ form.password.id_for_label }}">
+                        </div>
+                        {% for error in form.password.errors %}
+                        <p class="help is-danger">{{ error }}</p>
+                        {% endfor %}
+                    </div>
+
+                    <!-- Add the ReCaptcha field -->
+                    <div class="field">
+                        <label class="label">Captcha</label>
+                        <div class="control">
+                            {{ form.captcha }}
+                        </div>
+                        {% for error in form.captcha.errors %}
+                            <p class="help is-danger">{{ error }}</p>
+                        {% endfor %}
+                    </div>
+
+                    <div class="field">
+                        <p class="control">
+                            <span>Forgot your password? <a style="color: #48c78e;" href="{% url 'forgoturpassword' %}">Reset it</a></span><br>
+                            <span>Don't have an account? <a style="color: #48c78e;" href="{% url 'signup' %}">Create account</a></span>
+                        </p>
+                    </div>
+
+                    <div class="field">
+                        <button class="button is-success is-fullwidth is-medium">Login</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+
+{% endblock %}

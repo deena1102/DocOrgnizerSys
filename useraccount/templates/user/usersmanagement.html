@@ -1,0 +1,155 @@
+{% extends 'index.html' %}
+{% load csp %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style nonce="{{request.csp_nonce}}">
+        .id {
+            font-family: Arial, sans-serif;
+            /* background-color: #f4f4f4; */
+            margin: -5rem;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 70%;
+            margin: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+        }
+
+        th,td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #48c78e;
+            color: #fff;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        select.awesome-style {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #48c78e;
+            border-radius: 4px;
+            background-color: #fff;
+            color: #48c78e;
+            appearance: none;
+            cursor: pointer;
+        }
+
+        select.awesome-style:hover {
+            border-color: #48c78e;
+        }
+
+        select.awesome-style:focus {
+            outline: none;
+            border-color: #48c78e;
+        }
+
+        select.awesome-style option {
+            background-color: #fff;
+            color: #48c78e;
+        }
+
+        select.awesome-style option:hover {
+            background-color: #f2f2f2;
+            color: #333;
+        }
+        .btn-wrapper {
+            display: flex;
+            justify-content: center;
+            width: 50%;
+            margin: 2rem;
+
+        }
+        .btn:active {
+            box-shadow: inset #1c4532 0px 0px 9px 2px;
+        }
+        .btn {
+            width: 20%;
+            padding: 0.7rem;
+            background-color: #48c78e;
+            color: #f4f4f4;
+            font-size: 15px;
+            font-weight: bold;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+           box-shadow: #2f7354 0px 0px 4px 1px;
+        }
+    </style>
+    <title> User</title>
+</head>
+<body>
+    <form method="POST" action="{% url 'updateusersview' %}">
+        {% csrf_token %}
+        <div class="id">
+            {% if messages %}
+                <ul class="messages">
+                {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+            <table>
+                <thead>
+                    <tr>
+                        <th style="color: #fff;">User National ID</th>
+                        <th style="color: #fff;">User Full Name</th>
+                        <th style="color: #fff;">Group</th>
+                        {% if is_superuser %}
+                            <th style="color: #fff;">Staff</th>
+                        {% endif %}
+                    </tr>
+                </thead>
+                    <tbody>
+                        {% for user in all_users %}
+                            <tr>
+                                <td><input type="checkbox" name="selected_users" value="{{ user.national_id }}">{{ user.national_id }}</td>
+                                <td>{{ user.full_name }}</td>
+                                <td>
+                                    <select class="awesome-style" name="group_{{user.national_id}}">
+                                        <option value="group1" {% if user.group == 'Group1' %}selected{% endif %}>Group 1</option>
+                                        <option value="group2" {% if user.group == 'Group2' %}selected{% endif %}>Group 2</option>
+                                    </select>
+                                    {% if is_superuser %}
+                                    <td>
+                                        <select class="awesome-style" name="is_staff_{{user.national_id}}">
+                                            <option value="1" {% if user.is_staff %}selected{% endif %}>Staff</option>
+                                            <option value="0" {% if not user.is_staff %}selected{% endif %}>Not Staff</option>
+                                        </select>
+                                    </td>
+                                    {% endif %}
+                                        <!-- <button type="submit">Save</button> -->
+                                </td>
+                            </tr>
+                        {% endfor %}
+                </tbody>
+            </table>
+            <div class="btn-wrapper">
+                <button type="submit"  class="btn">Save Changes</button>
+            </div>
+        </div>
+    </form>
+</body>
+
+
+</html>
+{% endblock %}

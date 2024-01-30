@@ -1,0 +1,61 @@
+{% extends 'index.html' %}
+{% load csp %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>User Categories</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <style nonce="{{request.csp_nonce}}">
+        .section{
+            margin: -3rem;
+        }
+    </style>
+</head>
+<body>
+<section class="section">
+    <div class="container">
+        {% if error_message %}
+        <div class="notification is-danger">
+            <p>{{ error_message }}</p>
+        </div>
+        {% endif %}
+        {% if success %}
+            <p>{{ success }}</p>
+        </div>
+        {% endif %}
+        <div class="columns is-multiline">
+        {% if user.categories.all %}
+            {% for category in user.categories.all %}
+                <div class="column is-half">
+                    <div class="card">
+                        <div class="card-content has-text-centered">
+                            <img src="{% static 'image/logo.png' %}" alt="Logo" style="max-width: 80px; margin-bottom: 5px;">
+                            <p class="title is-size-5">{{ category.category_name }}</p>
+                            <div class="content is-size-6">
+                                {{ category.category_description }}
+                            </div>
+                            <a class="button is-primary" href="{% url 'userprotectedcategory' category_name=category.category_name %}" style="background-color: #48c78e;">View Category</a>
+                        <a class="button is-primary" href="{% url 'updatecategory' category_name=category.category_name %}" style="background-color: #b2b2b2;">Updat Category</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+        <div class="columns is-centered">
+            <div class="column is-half">
+                <p style="text-align: center; font-size: 24px; font-weight: bold; margin-top: 12rem;">You don't have any categories yet. Please create a category by going to the 'Create Category' page to have it displayed here.</p>
+            </div>
+        </div>
+        {% endif %}
+        </div>
+    </div>
+</section>
+
+
+</body>
+</html>
+{% endblock %}

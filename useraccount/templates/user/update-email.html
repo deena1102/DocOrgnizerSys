@@ -1,0 +1,97 @@
+{% extends 'index.html' %}
+{% load csp %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Change Email</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css">
+    <style nonce="{{request.csp_nonce}}">
+        body {
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-image: url("{%static 'image/background.png' %}");
+            background-size: cover;
+            background-position: center;
+        }
+        .container>.column>.box>form>.field>label {
+            color: #48c78e;
+        }
+        .container{
+        height: 70vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center; 
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="column is-4 is-offset-4">
+            <div class="box has-background-light">
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <!-- Display global form errors -->
+                    {% for error in form.non_field_errors %}
+                        <p class="notification is-danger">{{ error }}</p>
+                    {% endfor %}
+                    <div class="field">
+                        <label class="label" for="id_current_email">Current email address</label>
+                        <div class="control">
+                            <input class="input is-medium {% if form.current_email.errors %}is-danger{% endif %}" 
+                                type="text" 
+                                placeholder="Enter your Email"
+                                name="{{ form.current_email.name }}"
+                            >
+                            <!-- Display field-specific errors -->
+                            {% for error in form.current_email.errors %}
+                                <p class="help is-danger">{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label" for="id_new_email">New email address</label>
+                        <div class="control">
+                            <input class="input is-medium {% if form.new_email.errors %}is-danger{% endif %}" 
+                                type="text" 
+                                placeholder="Enter your Email"
+                                name="{{ form.new_email.name }}"
+                                
+                            >
+                            <!-- Display field-specific errors -->
+                            {% for error in form.new_email.errors %}
+                                <p class="help is-danger">{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label" for="id_password">Password</label>
+                        <div class="control">
+                            <input class="input is-medium {% if form.password.errors %}is-danger{% endif %}" 
+                                type="password" 
+                                placeholder="Enter your password"
+                                name="{{ form.password.name }}"
+                            >
+                            <!-- Display field-specific errors -->
+                            {% for error in form.password.errors %}
+                                <p class="help is-danger">{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="field">
+                        <button class="button is-success is-fullwidth is-medium">Change Email</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+{% endblock %}

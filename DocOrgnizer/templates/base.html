@@ -1,0 +1,124 @@
+<!-- DocOrgnizer/templates/base.html -->
+{% load csp %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DocOrganizer </title>
+    <link rel="icon" href="{% static 'image/logo.png' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css">
+    <style nonce="{{request.csp_nonce}}">
+        body {
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-image: url("{%static 'image/background.png' %}");
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .menu {
+            width: 100%;
+            background-color: #48c78e;
+            margin: 0rem;
+            padding: 0.8rem;
+            padding-top: 0.45rem;
+            padding-bottom: 0.45rem;
+            box-shadow: 4px 2px 7px 0px rgb(84, 161, 127);
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            color: white;
+            text-shadow: 1px 1px 1px gray;
+            margin-bottom: 5rem;
+        }
+
+        .container>.column>.box>form>.field>label {
+            color: #48c78e;
+        }
+
+        .menu>.logo {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+
+        .menu>.logo>img {
+            width: 30px;
+            height: 30px;
+            margin-right: 5px;
+
+        }
+        .menu>.btns {
+            display: flex;
+            flex-direction: row;
+        }
+        .menu>.btns>a {
+            color: white;
+            text-shadow: 1px 1px 1px gray;
+            text-decoration: none;
+        }
+        .box{
+        box-shadow: 2px 1px 5px 0px #226347 ;
+    }
+        .container{
+        height: 70vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center; 
+        }
+        .nav, .navbar-link {
+            background-color: #226347;
+            padding: 0.5rem;
+            padding-left: 0.9rem;
+            padding-right: 0.9rem;
+            border-radius: 15px;
+            margin: 0.2rem;
+            font-size: small;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="menu">
+        <div class="logo">
+            <img src="{%static 'image/logo.png' %}" alt="Logo image">
+            <h1>DocOrganizer</h1>
+        </div>
+        <div class="btns">
+                <a  class="nav" href="{% url 'home' %}">Home</a>
+                <a  class="nav" href="{% url 'login' %}">Login</a>
+                <a  class="nav" href="{% url 'signup' %}">Signup</a>  
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link" style="color: white;" href="">Help</a>
+                    <div class="navbar-dropdown">
+                        <a class="navbar-item" href="{% url 'faq' %}">FAQ</a>
+                        <a class="navbar-item" href="{% url 'aboutus' %}">About Us</a>
+                        <a class="navbar-item" href="{% url 'contact' %}">Contact Us</a>
+                    </div>
+                </div>    
+        </div>
+    </div>
+    </div>
+    {% block content %}
+    <div class="container">
+        <div class="column is-4 is-offset-4">
+            <div class="box has-background-light"> 
+                
+            </div>
+
+        </div>
+
+    </div>
+    {% endblock content %}
+    
+   
+</body>
+</html>
+

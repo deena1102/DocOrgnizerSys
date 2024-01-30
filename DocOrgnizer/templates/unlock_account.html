@@ -1,0 +1,14 @@
+{% autoescape off %}
+Hi {{ user }},
+
+We noticed multiple failed login attempts on your account, which resulted in your account being locked for security purposes.
+
+To unlock your account, please click on the link below. This link can only be used once:
+
+http://{{ domain }}{% url 'unlock_account' uidb64=uid token=token %}
+
+If you did not initiate this request or if you have any concerns, please contact our support team immediately.
+
+Sincerely,
+DocDrganizer Team.
+{% endautoescape %}

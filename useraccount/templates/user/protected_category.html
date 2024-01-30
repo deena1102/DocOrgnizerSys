@@ -1,0 +1,68 @@
+{% extends 'index.html' %}
+{% load csp %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enter Your Password</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css">
+    <style nonce="{{request.csp_nonce}}">
+        body {
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-image: url("{%static 'image/background.png' %}");
+            background-size: cover;
+            background-position: center;
+        }
+        .container>.column>.box>form>.field>label {
+            color: #48c78e;
+        }
+        .container{
+        height: 70vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center; 
+        }
+    </style>
+
+</head>
+
+
+<body>
+    <div class="container">
+        <div class="column is-4 is-offset-4">
+            <div class="box has-background-light">
+                <form method="POST" enctype="multipart/form-data" >
+                    {% csrf_token %}
+                    <div class="field">
+                        <label class="label" style="color: #48c78e;">Enter your password</label>
+                        <div class="control">
+                            <input class="input is-medium {% if form.password.errors %}is-danger{% endif %}" 
+                                   type="password" 
+                                   placeholder="Enter your password"
+                                   name="{{ form.password.name }}"
+                            >
+                        </div>
+                        <!-- Display field-specific errors -->
+                        {% for error in form.password.errors %}
+                            <p class="help is-danger">{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                
+                    <div class="field">
+                        <button class="button is-success is-fullwidth is-medium" >Open Category</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+   </body>
+
+</html>
+{% endblock %}

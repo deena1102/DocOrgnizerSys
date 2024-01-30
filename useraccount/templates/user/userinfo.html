@@ -1,0 +1,174 @@
+{% extends 'index.html' %}
+{% load csp %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My information</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css">
+    <style nonce="{{request.csp_nonce}}">
+        .container {
+            margin-top: 1rem;
+            color: #ecf0f1;
+            padding-left: 4cm;
+        }
+
+        .card {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            box-shadow: 1px 1px 5px 1px #226347;
+            width: 70%;
+        }
+
+        .user-info {
+            background-color: #226347;
+            color: white;
+            padding: 3px;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+
+        .user-info p {
+            margin-bottom: 0;
+        }
+
+        .user-info div {
+            color: #226347;
+        }
+
+        .title {
+            color: #f5f5f5;
+            padding-left: 0.5rem;
+            
+        }
+        .info{
+            background-color: #d6e3de;
+            padding: 0.5rem;
+            color: #226347;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        {% if belongs_to_group1 %}
+        <div class="columns is-centered">
+            <div class="column is-two-thirds">
+                <p style="text-align: center; font-size: 24px; font-weight: bold; margin-top: 6rem;">
+                    We appreciate your interest in using certain services on DocOrganizer. However, for added security, a physical presence verification is required for access this service.
+                    To complete this verification, kindly visit the DocOrganizer center, bringing your national ID for authentication. This in-person process is necessary to ensure the security of your account.
+                    If you have questions or need assistance, feel free to contact us.<br><strong> Your safety and the security of your information are our top priorities.
+                </p>
+            </div>
+        </div>
+        {% else %}
+        <div class="container">
+            <div class="columns">
+                <div class="column is-half">
+                    <div class="card">
+                        <div class="card-content user-info">
+                            <p class="title is-4">Full Name</p>
+                            <div class="info">{{ user_info.full_name }}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="column is-half">
+                    <div class="card">
+                        <div class="card-content user-info">
+                            <p class="title is-4">National ID</p>
+                            <div class="info">{{ user_info.national_id }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="columns">
+                <div class="column is-half">
+                    <div class="card">
+                        <div class="card-content user-info">
+                            <p class="title is-4">Father Name</p>
+                            <div class="info">{{ father_name }}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="column is-half">
+                    <div class="card">
+                        <div class="card-content user-info">
+                            <p class="title is-4">Date of Birth</p>
+                            <div class="info">{{birthdate|date }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="columns">
+                <div class="column is-half">
+                    <div class="card">
+                        <div class="card-content user-info">
+                            <p class="title is-4">Grandfather Name</p>
+                            <div class="info">{{grandfather_name }} </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="column is-half">
+                    <div class="card">
+                        <div class="card-content user-info">
+                            <p class="title is-4">Nationality</p>
+                            <div class="info">{{nationality }} </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="columns">
+                <div class="column is-half">
+                    <div class="card">
+                        <div class="card-content user-info">
+                            <p class="title is-4">Family Name</p>
+                            <div class="info">{{family_name }} </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="column is-half">
+                    <div class="card">
+                        <div class="card-content user-info">
+                            <p class="title is-4">Gender</p>
+                            <div class="info">{{gender}} </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="columns">
+                <div class="column is-half">
+                    <div class="card">
+                        <div class="card-content user-info">
+                            <p class="title is-4">Mother Name</p>
+                            <div class="info">{{mother_name }} </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="column is-half">
+                    <div class="card">
+                        <div class="card-content user-info">
+                            <p class="title is-4">City</p>
+                            <div class="info">{{City}} </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
+{% endblock %}

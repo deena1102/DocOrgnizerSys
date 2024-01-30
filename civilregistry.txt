@@ -1,0 +1,21 @@
+Maria Ahmad Abu Samoor,123456789,12/6/2002,Ahmad,Abdalsalam,Abu Samoor,Fatima,Palestinian,Femal,Hebron
+Deena Amer Seaydahmad,958724631,10/1/2002,Amer,Taha,SeadAhmad,Zeenat,Palestinian,Femal,Hebron
+Dan Amer,147852369,10/1/2002,Amer,Taha,SeadAhmad,Zeenat,Palestinian,Femal,Hebron
+Saleh Mansor Seaydahmad,309875142,10/1/2002,Amer,Taha,SeadAhmad,Zeenat,Palestinian,Femal,Hebron
+Yousef Mansor Seaydahmad,624198753,10/1/2002,Amer,Taha,SeadAhmad,Zeenat,Palestinian,male,Hebron
+Noor Amer Seaydahmad,817563492,5/26/2002,Amer,Taha,SeadAhmad,Zeenat,Palestinian,Femal,Hebron
+NourAldeen Ahmad Alamleh,451703300,5/1/1971,Ahmad,Mahmoud,Alamleh,Fahima,Palestinian,Male,Hebron
+Tamara Naser Seaydahmad ,135279468,19
+Amer Taha Seaydahmad,492857316,15
+Zenat Ishaa Seaydahmad,761934825,18
+Naser Taha Seaydahmad,586341927,21
+Mansor Taha Seaydahmad,243698571,24
+Amhad Taha Seaydahmad,978416235,34
+Dana Amer,258741369,22
+Amer Ahmad,321654987,15
+Mohammed,852147963,20
+Mahmmod,456321789,18
+Maryam,159847623,20
+Loryn,236514789,12
+ranya,789654123,15
+Fofo,147255836,12

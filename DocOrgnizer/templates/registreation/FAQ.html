@@ -1,0 +1,193 @@
+{% extends 'home.html' %}
+{% load csp %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frequently Asked Questions</title>
+
+    <style nonce="{{request.csp_nonce}}">
+        /* .container {
+            
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        } */
+
+        header {
+            background-color: #40a779;
+            color: #fff;
+            padding: 1rem;
+            text-align: center;
+            margin-bottom: 1rem;
+            width: 100%;
+            z-index: 100;
+        }
+
+
+        .wrapper {
+            font-family: Arial, sans-serif;
+            margin-top: 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 80vh;
+            max-height: 80vh;
+        }
+
+        .section {
+            width: 70%;
+            padding: 2rem;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow-y: auto;
+            max-height: 80vh;
+            height: 60vh;
+            overflow-x: hidden;
+        }
+
+        .faq-card {
+            /* background-color:#48c78e; */
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            transition: box-shadow 0.3s ease;
+            width: 100%;
+        }
+
+        .faq-card:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .question {
+            
+            margin-bottom: 0.5em;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .answer {
+            display: none;
+            margin-top: 0.5em;
+        }
+
+        .question-arrow {
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-top: 5px solid #333;
+            margin-left: 5px;
+        }
+
+        .show-answer .answer {
+            display: block;
+        }
+        .custom {
+            border: none;
+            height: 2px;
+            background: linear-gradient(to right, transparent, green, transparent);
+            box-shadow: 0 8px 16px rgba(0, 128, 0, 0.3); /* Adjust values as needed */
+            }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+    <div class="wrapper">
+        <div class="section">
+            <header>
+                <h1>Frequently Asked Questions</h1>
+            </header>
+
+            <div class="faq-card" onclick="toggleAnswer(this)">
+                <div class="question">
+                    <h2>What is DocOrganizer?</h2>
+                    <div class="question-arrow"></div>
+                </div>
+                <div class="answer">
+                    <hr class="custom">
+                    <p>
+                        DocOrganizer is a web-based system for official and personal document management. 
+                        It allows users to request official documents from government entities, and these documents are directly transferred from the relevant ministry to the user, without any intervention from the website's system.
+                        Additionally, users can create custom categories to store the documents they need, albeit with a limited number. Users can download, view, or manage documents within their custom and system categories.
+                    </p>
+                </div>
+            </div>
+            <div class="faq-card" onclick="toggleAnswer(this)">
+                <div class="question">
+                    <h2>Why can't I access my official documents?</h2>
+                    <div class="question-arrow"></div>
+                </div>
+                <div class="answer">
+                    <hr class="custom">
+                    <p>
+                        To access your official documents, you must be physically present at one of our centers.
+                        This is necessary for us to verify your identity and determine the specific group to which you belong.
+                    </p>
+                </div>
+            </div>
+            <div class="faq-card" onclick="toggleAnswer(this)">
+                <div class="question">
+                    <h2>Why does the user need to physically visit the DocOrganizer center?</h2>
+                    <div class="question-arrow"></div>
+                </div>
+                <div class="answer">
+                    <hr class="custom">
+                    <p>
+                        Users are required to visit the Doc Organizer center to fully verify their identity through personal presence and ID confirmation. 
+                        This process qualifies the user to be part of the Trusted Users Group, granting access to their system categories and the "My Information" page. 
+                        These pages house specific information related to the individual with a particular ID number, and access remains restricted until comprehensive identity verification is successfully completed.
+                    </p>
+                </div>
+            </div>
+            <div class="faq-card" onclick="toggleAnswer(this)">
+                <div class="question">
+                    <h2>How does DocOrganizer protect the documents uploaded by users?</h2>
+                    <div class="question-arrow"></div>
+                </div>
+                <div class="answer">
+                    <hr class="custom">
+                    <p>
+                        The system encrypts the user's documents using a unique key associated with each user.
+                        This key is derived from the user's password, which is securely hashed. 
+                        Since the actual password is not known or stored, we achieve a level of security akin to end-to-end encryption.
+                    </p>
+                </div>
+            </div>
+
+            <div class="faq-card" onclick="toggleAnswer(this)">
+                <div class="question">
+                    <h2>What are custom categories?</h2>
+                    <div class="question-arrow"></div>
+                </div>
+                <div class="answer">
+                    <hr class="custom">
+                    <p>
+                        Custom categories are user-created sections designed for the private storage of documents.
+                        Each user is allowed to create their own 4 categories, and if they wish to modify any category, they can do so by clicking on the "Update Category" option.
+                        This feature ensures users have a personalized and secure way to organize their documents.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Add more FAQ cards as needed -->
+
+        </div>
+    </div>
+    </div>
+    <script nonce="{{request.csp_nonce}}">
+        function toggleAnswer(card) {
+            card.classList.toggle("show-answer");
+        }
+    </script>
+</body>
+</html>
+{% endblock %}
