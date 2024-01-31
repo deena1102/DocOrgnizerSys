@@ -4860,3 +4860,5 @@ WARNING 2024-01-30 16:51:45,777 django.request Thread-2 (process_request_thread)
 WARNING 2024-01-30 16:51:45,780 django.server Thread-2 (process_request_thread) 12852 basehttp basehttp.py 212 django.server log_message 9240 "GET /useraccount/open_pdf/Birth%20Certificate/4.pdf/ HTTP/1.1" 400 19
 WARNING 2024-01-30 16:51:46,470 django.request Thread-2 (process_request_thread) 12852 log log.py 241 django.request log_response 9240 Not Found: /favicon.ico
 WARNING 2024-01-30 16:51:46,486 django.server Thread-2 (process_request_thread) 12852 basehttp basehttp.py 212 django.server log_message 9240 "GET /favicon.ico HTTP/1.1" 404 4063
+WARNING 2024-01-30 17:11:15,611 django.request Thread-3 (process_request_thread) 10332 log log.py 241 django.request log_response 10000 Not Found: /css/contact.css
+WARNING 2024-01-30 17:11:15,617 django.server Thread-3 (process_request_thread) 10332 basehttp basehttp.py 212 django.server log_message 10000 "GET /css/contact.css HTTP/1.1" 404 4075

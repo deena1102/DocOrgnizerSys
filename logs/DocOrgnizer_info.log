@@ -10819,3 +10819,17 @@ WARNING 2024-01-30 16:51:45,777 django.request Thread-2 (process_request_thread)
 WARNING 2024-01-30 16:51:45,780 django.server Thread-2 (process_request_thread) 12852 basehttp basehttp.py 212 django.server log_message 9240 "GET /useraccount/open_pdf/Birth%20Certificate/4.pdf/ HTTP/1.1" 400 19
 WARNING 2024-01-30 16:51:46,470 django.request Thread-2 (process_request_thread) 12852 log log.py 241 django.request log_response 9240 Not Found: /favicon.ico
 WARNING 2024-01-30 16:51:46,486 django.server Thread-2 (process_request_thread) 12852 basehttp basehttp.py 212 django.server log_message 9240 "GET /favicon.ico HTTP/1.1" 404 4063
+INFO 2024-01-30 17:11:01,194 django.utils.autoreload MainThread 7488 autoreload autoreload.py 668 django.utils.autoreload run_with_reloader 10000 Watching for file changes with StatReloader
+INFO 2024-01-30 17:11:03,820 django.server Thread-2 (process_request_thread) 4292 basehttp basehttp.py 212 django.server log_message 10000 "GET / HTTP/1.1" 200 4977
+INFO 2024-01-30 17:11:06,242 django.server Thread-2 (process_request_thread) 4292 basehttp basehttp.py 212 django.server log_message 10000 "GET /login/ HTTP/1.1" 200 6873
+INFO 2024-01-30 17:11:07,231 django.server Thread-2 (process_request_thread) 4292 basehttp basehttp.py 212 django.server log_message 10000 "GET /signup/ HTTP/1.1" 200 11231
+INFO 2024-01-30 17:11:11,270 django.server Thread-2 (process_request_thread) 4292 basehttp basehttp.py 212 django.server log_message 10000 "GET /faq/ HTTP/1.1" 200 11512
+INFO 2024-01-30 17:11:12,824 django.server Thread-2 (process_request_thread) 4292 basehttp basehttp.py 212 django.server log_message 10000 "GET /aboutus/ HTTP/1.1" 200 7475
+INFO 2024-01-30 17:11:12,897 django.server Thread-2 (process_request_thread) 4292 basehttp basehttp.py 212 django.server log_message 10000 "GET /static/image/maria.jpg HTTP/1.1" 304 0
+INFO 2024-01-30 17:11:12,899 django.server Thread-1 (process_request_thread) 6128 basehttp basehttp.py 212 django.server log_message 10000 "GET /static/image/deena.jpg HTTP/1.1" 304 0
+INFO 2024-01-30 17:11:12,901 django.server Thread-3 (process_request_thread) 10332 basehttp basehttp.py 212 django.server log_message 10000 "GET /static/image/haya.jpeg HTTP/1.1" 304 0
+INFO 2024-01-30 17:11:15,495 django.server Thread-3 (process_request_thread) 10332 basehttp basehttp.py 212 django.server log_message 10000 "GET /contact/ HTTP/1.1" 200 7864
+WARNING 2024-01-30 17:11:15,611 django.request Thread-3 (process_request_thread) 10332 log log.py 241 django.request log_response 10000 Not Found: /css/contact.css
+WARNING 2024-01-30 17:11:15,617 django.server Thread-3 (process_request_thread) 10332 basehttp basehttp.py 212 django.server log_message 10000 "GET /css/contact.css HTTP/1.1" 404 4075
+INFO 2024-01-30 17:11:19,165 django.server Thread-3 (process_request_thread) 10332 basehttp basehttp.py 212 django.server log_message 10000 "GET /signup/ HTTP/1.1" 200 11231
+INFO 2024-01-30 17:11:21,191 django.server Thread-3 (process_request_thread) 10332 basehttp basehttp.py 212 django.server log_message 10000 "GET /login/ HTTP/1.1" 200 6741
